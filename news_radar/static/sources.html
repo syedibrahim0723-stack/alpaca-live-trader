@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>News Radar sources</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="btn" href="/">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+    Live desk
+  </a>
+  <h1 style="margin:0;font-size:16px">Sources &amp; API keys</h1>
+  <span class="grow"></span>
+  <span class="muted" style="font-size:12px">Keys are encrypted on the server and only shown masked after saving.</span>
+</header>
+
+<main class="page">
+  <section class="col-main" aria-label="Sources">
+    <h2 class="sec">Platform keys</h2>
+    <div id="platform"></div>
+    <h2 class="sec">News providers</h2>
+    <div id="news" style="display:flex;flex-direction:column;gap:12px"></div>
+  </section>
+
+  <aside class="col-side" aria-label="Settings">
+    <form class="panel" id="settings" style="display:flex;flex-direction:column;gap:12px">
+      <h3 style="margin:0">Watchlist</h3>
+      <label class="field">Tickers (comma or space separated) — company-news polling, flash and sound
+        <input name="watchlist" class="mono" placeholder="AAPL, NVDA, TSLA">
+      </label>
+
+      <h3 style="margin:8px 0 0">New vs. already seen</h3>
+      <p class="muted" style="margin:0;font-size:13px">A story is NEW only the first time any source delivers it, and only if it was published recently. Repeats from other sources merge into the first copy.</p>
+      <label class="field">NEW badge lasts (minutes)<input name="new_window_min" type="number" min="1" max="240"></label>
+      <label class="field">Treat as duplicate within (hours)<input name="dedupe_hours" type="number" min="1" max="168"></label>
+      <label class="field">Headline similarity needed to merge: <span id="simv" class="mono"></span>
+        <input name="similarity" type="range" min="0.5" max="0.98" step="0.01" style="height:auto;padding:0;accent-color:#58A6FF">
+      </label>
+
+      <h3 style="margin:8px 0 0">Categorization &amp; topics</h3>
+      <label class="field">Classifier
+        <select name="classifier"><option value="ai">Claude AI classifier (needs Anthropic key)</option><option value="keywords">Keyword rules (free)</option></select>
+      </label>
+      <label class="field">Claude model<input name="ai_model" class="mono"></label>
+      <label class="field">Rebuild topic model every (minutes)<input name="topic_refresh_min" type="number" min="2" max="120"></label>
+
+      <h3 style="margin:8px 0 0">Data feeds</h3>
+      <label class="field">Alpaca market-data feed
+        <select name="alpaca_feed"><option value="iex">IEX (free)</option><option value="sip">SIP (paid subscription)</option></select>
+      </label>
+      <label class="field">SEC User-Agent (required by sec.gov: "Your Name your@email.com")<input name="sec_user_agent"></label>
+      <div style="display:flex;gap:10px;align-items:center"><button class="btn primary" type="submit">Save settings</button><span class="result" id="sres"></span></div>
+    </form>
+  </aside>
+</main>
+<script src="/static/sources.js"></script>
+</body>
+</html>
