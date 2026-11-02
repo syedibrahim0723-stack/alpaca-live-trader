@@ -22,6 +22,12 @@ It runs separately from the live-trader app in the parent folder and has its own
 
 ## Run it
 
+**Windows, one click:** download `install_news_radar.bat` and double-click it. It downloads the app into `%USERPROFILE%\NewsRadar`, adds a "News Radar" shortcut to the desktop and starts the app. Run it again to update; your keys and data are kept. After that, start the app with the shortcut or `run.bat`. Needs Python 3.10+ with "Add python.exe to PATH" ticked during install.
+
+**Windows, from a clone:** double-click `news_radar\run.bat`.
+
+**macOS / Linux:**
+
 ```bash
 cd news_radar
 ./run.sh
